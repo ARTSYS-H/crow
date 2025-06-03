@@ -1,0 +1,63 @@
+<div align="center">
+    <img src="./assets/images/logo-crow.png" alt="Crow Logo">
+    <h1>Crow</h1>
+</div>
+
+Crow is a Go library designed to create command-line applications in a simple and intuitive way using struct fields and tags. Inspired by projects like [Commandeer](commandeer), Crow aims to provide a more straightforward and "plug & play" solution for creating small applications or scripts, thereby reducing the complexity often associated with libraries like [Cobra](cobra).
+
+## Project Origin
+
+Crow was developed to meet a specific need: the quick and simple creation of small command-line applications. Personally, I have often found myself creating scripts and small applications where libraries like [Cobra](cobra) introduced unnecessary complexity. Additionally, tools like [Commandeer](commandeer), which share a similar approach, seem to have lost some of their momentum in terms of maintenance. Crow was born to offer a simple and well-maintained alternative.
+
+## Features
+
+- **Simplicity**: Create CLI applications with minimal code and configuration.
+- **Use of Structs and Tags**: Define your commands and options directly in Go structures with tags.
+- **Automatic Help Message Generation**: Help messages for your commands are automatically generated, making it easier to document and use your application.
+- **Plug and Play**: Designed to be easy to integrate and use without complex configuration.
+- **Ideal for Small Projects**: Perfect for scripts and small applications where libraries like [Cobra](cobra) would be excessive.
+
+## Installation
+
+To install Crow, use the `go get` command:
+
+```bash
+go get github.com/ARTSYS-H/crow
+```
+
+## Usage
+
+Here is a simple example to get started with Crow:
+```go
+package main
+
+import (
+    "github.com/ARTSYS-H/crow"
+)
+
+type MyCommand struct {
+    Name string `crow:"name,n,required,help:Your name"`
+    Age  int    `crow:"age,a,help:Your age"`
+}
+
+func main() {
+    var cmd MyCommand
+    crow.Parse(&cmd)
+
+    // Utilisez cmd.Name et cmd.Age ici
+    println("Name:", cmd.Name)
+    println("Age:", cmd.Age)
+}
+```
+
+### Explanation
+
+- **Structs and Tags**: Define your commands and options as fields of a struct with tags to specify command-line options.
+- **crow.Parse**: Use this function to parse command-line arguments and populate your struct.
+
+## Contribution
+
+Contributions are welcome! If you have suggestions, bug fixes, or improvements, feel free to open an issue or a pull request.
+
+[commandeer]: (https://github.com/jaffee/commandeer)
+[cobra]: (https://github.com/spf13/cobra)

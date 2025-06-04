@@ -5,6 +5,8 @@
 
 Crow is a Go library designed to create command-line applications in a simple and intuitive way using struct fields and tags. Inspired by projects like [Commandeer](commandeer), Crow aims to provide a more straightforward and "plug & play" solution for creating small applications or scripts, thereby reducing the complexity often associated with libraries like [Cobra](cobra).
 
+> :warning: **Warning** Crow is still in development.
+
 ## Project Origin
 
 Crow was developed to meet a specific need: the quick and simple creation of small command-line applications. Personally, I have often found myself creating scripts and small applications where libraries like [Cobra](cobra) introduced unnecessary complexity. Additionally, tools like [Commandeer](commandeer), which share a similar approach, seem to have lost some of their momentum in terms of maintenance. Crow was born to offer a simple and well-maintained alternative.
@@ -32,21 +34,26 @@ Here is a simple example to get started with Crow:
 package main
 
 import (
-    "github.com/ARTSYS-H/crow"
+    "github.com/ARTSYS-H/crow/pkg/crow"
 )
 
 type MyCommand struct {
-    Name string `crow:"name,n,required,help:Your name"`
-    Age  int    `crow:"age,a,help:Your age"`
+    Name string `help:"You Name"`
+    Age  int    `help:"Your age"`
 }
 
 func main() {
-    var cmd MyCommand
-    crow.Parse(&cmd)
-
-    // Utilisez cmd.Name et cmd.Age ici
-    println("Name:", cmd.Name)
-    println("Age:", cmd.Age)
+    app := crow.New("App Name", "App Description")
+    command := &MyCommand{
+        Name: "Lucas",
+        Age: 27,
+    }
+    app.AddCommand(command, "Description of the command")
+    err = app.Execute(os.Args)
+    if err != nil {
+        fmt.Println(err)
+        os.Exit(1)
+    }
 }
 ```
 

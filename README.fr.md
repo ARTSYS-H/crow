@@ -3,13 +3,13 @@
     <h1>Crow</h1>
 </div>
 
-Crow est une bibliothèque Go conçue pour créer des applications en ligne de commande de manière simple et intuitive en utilisant les struct fields et les tags. Inspirée par des projets comme [Commandeer](commandeer), Crow vise à fournir une solution plus directe et "plug & play" pour la création de petites applications ou scripts, réduisant ainsi la complexité souvent associée à des bibliothèques comme [Cobra](cobra).
+Crow est une bibliothèque Go conçue pour créer des applications en ligne de commande de manière simple et intuitive en utilisant les struct fields et les tags. Inspirée par des projets comme [Commandeer](https://github.com/jaffee/commandeer), Crow vise à fournir une solution plus directe et "plug & play" pour la création de petites applications ou scripts, réduisant ainsi la complexité souvent associée à des bibliothèques comme [Cobra](https://github.com/spf13/cobra).
 
-> :warning: **Attention** Crow est toujours en développement.
+> :warning: **Attention** Crow est toujours en développement. Considérez-la comme expérimental.
 
 ## Origine du Projet
 
-Crow a été développé pour répondre à un besoin spécifique : la création rapide et simple de petites applications en ligne de commande. Personnellement, je me suis souvent retrouvé à créer des scripts et petites applications où des bibliothèques comme [Cobra](cobra) introduisaient une complexité inutile. De plus, des outils comme [Commandeer](commandeer), qui partagent une approche similaire, semblent avoir perdu de leur dynamisme en termes de maintenance. Crow est donc né pour offrir une alternative simple et bien maintenue.
+Crow a été développé pour répondre à un besoin spécifique : la création rapide et simple de petites applications en ligne de commande. Personnellement, je me suis souvent retrouvé à créer des scripts et petites applications où des bibliothèques comme [Cobra](https://github.com/spf13/cobra) introduisaient une complexité inutile. De plus, des outils comme [Commandeer](https://github.com/jaffee/commandeer), qui partagent une approche similaire, semblent avoir perdu de leur dynamisme en termes de maintenance. Crow est donc né pour offrir une alternative simple et bien maintenue.
 
 ## Caractéristiques
 
@@ -17,7 +17,7 @@ Crow a été développé pour répondre à un besoin spécifique : la création 
 - **Utilisation de Structs et Tags** : Définissez vos commandes et options directement dans des structures Go avec des tags.
 - **Génération Automatique de Messages d'Aide** : Les messages d'aide pour vos commandes sont générés automatiquement, facilitant la documentation et l'utilisation de votre application.
 - **Plug and Play** : Conçu pour être facile à intégrer et à utiliser sans configuration complexe.
-- **Idéal pour les Petits Projets** : Parfait pour les scripts et petites applications où des bibliothèques comme [Cobra](cobra) seraient excessives.
+- **Idéal pour les Petits Projets** : Parfait pour les scripts et petites applications où des bibliothèques comme [Cobra](https://github.com/spf13/cobra) seraient excessives.
 
 ## Installation
 
@@ -40,6 +40,10 @@ import (
 type MyCommand struct {
     Name string `help:"You Name"`
     Age  int    `help:"Your age"`
+}
+
+func (mc *MyCommand) Run() error {
+    // Do your stuff here
 }
 
 func main() {

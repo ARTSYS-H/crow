@@ -24,7 +24,7 @@ Crow was developed to meet a specific need: the quick and simple creation of sma
 To install Crow, use the `go get` command:
 
 ```bash
-go get github.com/ARTSYS-H/crow
+go get github.com/ARTSYS-H/crow/pkg/crow
 ```
 
 ## Usage
@@ -60,7 +60,7 @@ func main() {
 ### Explanation
 
 - **Structs and Tags**: Define your commands and options as fields of a struct with tags to specify command-line options.
-- **crow.Parse**: Use this function to parse command-line arguments and populate your struct.
+- **crow.Execute**: Use this function to parse command-line arguments.
 
 ## Contribution
 

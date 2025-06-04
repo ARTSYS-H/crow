@@ -24,7 +24,7 @@ Crow a été développé pour répondre à un besoin spécifique : la création 
 Pour installer Crow, utilisez la commande `go get` :
 
 ```bash
-go get github.com/ARTSYS-H/crow
+go get github.com/ARTSYS-H/crow/pkg/crow
 ```
 
 ## Utilisation
@@ -60,7 +60,7 @@ func main() {
 ### Explication
 
 - **Structs et Tags** : Définissez vos commandes et options en tant que champs d'une struct avec des tags pour spécifier les options de ligne de commande.
-- **crow.Parse** : Utilisez cette fonction pour analyser les arguments de la ligne de commande et remplir votre struct.
+- **crow.Execute** : Utilisez cette fonction pour analyser les arguments de la ligne de commande.
 
 ## Contribution
 

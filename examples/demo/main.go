@@ -13,8 +13,8 @@ func main() {
 	app := crow.New("demo", "Demo is a demo application.")
 	author := author.New()
 	editor := editor.New()
-	app.AddCommmand(author, "Description of the Author")
-	app.AddCommmand(editor, "Description of the Editor")
+	app.AddCommand(author, "Description of the Author")
+	app.AddCommand(editor, "Description of the Editor")
 	err := app.Execute(os.Args)
 	if err != nil {
 		fmt.Println(err)

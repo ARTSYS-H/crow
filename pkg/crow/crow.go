@@ -21,7 +21,7 @@ func New(name, description string) *App {
 	}
 }
 
-func (app *App) AddCommmand(command Command, description string) error {
+func (app *App) AddCommand(command Command, description string) error {
 	cmdName, err := getNameOfCommand(command)
 	if err != nil {
 		return err

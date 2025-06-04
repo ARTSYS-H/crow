@@ -12,7 +12,7 @@ import (
 func main() {
 	app := crow.New("Demo", "This is a demo of Crow CLI.")
 	person := person.New()
-	err := app.AddCommmand(person, "modify value of person")
+	err := app.AddCommand(person, "modify value of person")
 	if err != nil {
 		log.Fatalln(err)
 	}

@@ -3,6 +3,8 @@
     <h1>Crow</h1>
 </div>
 
+[![Go Reference](https://pkg.go.dev/badge/github.com/ARTSYS-H/crow/pkg/crow.svg)](https://pkg.go.dev/github.com/ARTSYS-H/crow/pkg/crow)
+
 Crow est une bibliothèque Go conçue pour créer des applications en ligne de commande de manière simple et intuitive en utilisant les struct fields et les tags. Inspirée par des projets comme [Commandeer](https://github.com/jaffee/commandeer), Crow vise à fournir une solution plus directe et "plug & play" pour la création de petites applications ou scripts, réduisant ainsi la complexité souvent associée à des bibliothèques comme [Cobra](https://github.com/spf13/cobra).
 
 > :warning: **Attention** Crow est toujours en développement. Considérez-la comme expérimental.

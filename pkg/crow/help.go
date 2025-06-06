@@ -18,6 +18,12 @@ func (app *App) helpHandler() error {
 		return nil
 	}
 
+	// Find a match for the requested Additional help topic
+	if topic, exist := app.Topics[app.Arguments[2]]; exist {
+		fmt.Println(topic.Content)
+		return nil
+	}
+
 	// Iterate over commands to find a match for the requested help topic
 	for _, cmd := range app.Commands {
 		cmdName, err := getNameOfCommand(cmd)
@@ -66,6 +72,18 @@ func (app *App) getHelpString() (string, error) {
 		}
 		helpString += "\n"
 		helpString += fmt.Sprintf("Use \"%s help <command>\" for more information about a command.\n", app.Name)
+	}
+	// If there are topics, list them with their descriptions
+	if len(app.Topics) >= 1 {
+		helpString += "\n"
+		helpString += "Additional help topics:\n"
+		helpString += "\n"
+		for name, topic := range app.Topics {
+			helpString += fmt.Sprintf("\t%-15s %s\n", name, topic.Description)
+		}
+		helpString += "\n"
+		helpString += fmt.Sprintf("Use \"%s help <topic>\" for more information about a topic.\n", app.Name)
+
 	}
 
 	return helpString, nil

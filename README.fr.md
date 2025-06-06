@@ -21,6 +21,8 @@ Crow a été développé pour répondre à un besoin spécifique : la création 
 - **Plug and Play** : Conçu pour être facile à intégrer et à utiliser sans configuration complexe.
 - **Idéal pour les Petits Projets** : Parfait pour les scripts et petites applications où des bibliothèques comme [Cobra](https://github.com/spf13/cobra) seraient excessives.
 
+> :sparkles: **New Feature:** Vous pouvez créer des topic d'aides additionnels.
+
 ## Installation
 
 Pour installer Crow, utilisez la commande `go get` :

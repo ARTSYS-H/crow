@@ -21,6 +21,8 @@ Crow was developed to meet a specific need: the quick and simple creation of sma
 - **Plug and Play**: Designed to be easy to integrate and use without complex configuration.
 - **Ideal for Small Projects**: Perfect for scripts and small applications where libraries like [Cobra](https://github.com/spf13/cobra) would be excessive.
 
+> :sparkles: **New Feature:** You can create additional help topic.
+
 ## Installation
 
 To install Crow, use the `go get` command:

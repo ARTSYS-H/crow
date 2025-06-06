@@ -15,6 +15,7 @@ func main() {
 	editor := editor.New()
 	app.AddCommand(author, "Description of the Author")
 	app.AddCommand(editor, "Description of the Editor")
+	app.AddTopic("info", "Example of topic", "This the Topic Content!")
 	err := app.Execute(os.Args)
 	if err != nil {
 		fmt.Println(err)

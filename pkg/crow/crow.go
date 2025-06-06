@@ -34,7 +34,8 @@ type App struct {
 	Name                string            // Name of the application
 	Description         string            // Description of the application
 	Commands            []Command         // List of available commands
-	CommandsDescription map[string]string // Description o commands associated with their names
+	Topics              map[string]*Topic // List of available Topics associated with their names
+	CommandsDescription map[string]string // Description of commands associated with their names
 	Arguments           []string          // Arguments passed to the application
 }
 
@@ -44,6 +45,7 @@ func New(name, description string) *App {
 	return &App{
 		Name:                name,
 		Description:         description,
+		Topics:              make(map[string]*Topic),
 		CommandsDescription: make(map[string]string),
 	}
 }
@@ -65,6 +67,18 @@ func (app *App) AddCommand(command Command, description string) error {
 	// Add the command and its description
 	app.Commands = append(app.Commands, command)
 	app.CommandsDescription[cmdName] = description
+
+	return nil
+}
+
+func (app *App) AddTopic(name, description, content string) error {
+	// Check if the topic already exists
+	if _, ok := app.Topics[name]; ok {
+		return fmt.Errorf("The command %s already exist", name)
+	}
+
+	// Add the topic
+	app.Topics[name] = &Topic{Description: description, Content: content}
 
 	return nil
 }

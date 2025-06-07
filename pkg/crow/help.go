@@ -1,6 +1,9 @@
 package crow
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 // helpRegexp is a regular expression pattern to match various forms of help requests.
 const helpRegexp = `^-h|--help|-help|help$`
@@ -45,46 +48,49 @@ func (app *App) helpHandler() error {
 	return fmt.Errorf("%s help %s: unknown help topic. Run '%s help'.", app.Name, app.Arguments[2], app.Name)
 }
 
-// getHelpString generates a help message string for the application.
-// It includes the application description, usage instructions, and a list of available commands.
-func (app *App) getHelpString() (string, error) {
-	var helpString string
-
-	// Add the application description to the help string
-	helpString += fmt.Sprintf("%s\n", app.Description)
-	helpString += "\n"
-	helpString += "Usage:\n"
-	helpString += "\n"
-	helpString += fmt.Sprintf("\t%s <command> [arguments]\n", app.Name)
-	helpString += "\n"
-	// If there are commands, list them with their descriptions
+func (app *App) helpCommandsBuilder(builder *strings.Builder) error {
 	if len(app.Commands) >= 1 {
-		helpString += "The commands are:\n"
-		helpString += "\n"
+		builder.WriteString("The commands are:\n\n")
 		for _, cmd := range app.Commands {
 			cmdName, err := getNameOfCommand(cmd)
 			if err != nil {
-				return "", err
+				return err
 			}
 			// Format each command and its description into the help string
-			helpString += fmt.Sprintf("\t%-15s %s\n", cmdName, app.CommandsDescription[cmdName])
-
+			fmt.Fprintf(builder, "\t%-15s %s\n", cmdName, app.CommandsDescription[cmdName])
 		}
-		helpString += "\n"
-		helpString += fmt.Sprintf("Use \"%s help <command>\" for more information about a command.\n", app.Name)
+		fmt.Fprintf(builder, "\nUse \"%s help <command>\" for more information about a command.\n", app.Name)
 	}
-	// If there are topics, list them with their descriptions
+	return nil
+}
+
+func (app *App) helpTopicsBuilder(builder *strings.Builder) {
 	if len(app.Topics) >= 1 {
-		helpString += "\n"
-		helpString += "Additional help topics:\n"
-		helpString += "\n"
+		builder.WriteString("\nAdditional help topics:\n\n")
 		for name, topic := range app.Topics {
-			helpString += fmt.Sprintf("\t%-15s %s\n", name, topic.Description)
+			fmt.Fprintf(builder, "\t%-15s %s\n", name, topic.Description)
 		}
-		helpString += "\n"
-		helpString += fmt.Sprintf("Use \"%s help <topic>\" for more information about a topic.\n", app.Name)
+		fmt.Fprintf(builder, "\nUse \"%s help <topic>\" for more information about a topic.\n", app.Name)
+	}
+}
 
+// getHelpString generates a help message string for the application.
+// It includes the application description, usage instructions, and a list of available commands.
+func (app *App) getHelpString() (string, error) {
+	var helpBuilder strings.Builder
+
+	// Add the application description to the help string
+	fmt.Fprintf(&helpBuilder, "%s\n", app.Description)
+	helpBuilder.WriteString("\nUsage:\n\n")
+	fmt.Fprintf(&helpBuilder, "\t%s <command> [arguments]\n\n", app.Name)
+
+	// If there are commands, list them with their descriptions
+	if err := app.helpCommandsBuilder(&helpBuilder); err != nil {
+		return "", err
 	}
 
-	return helpString, nil
+	// If there are topics, list them with their descriptions
+	app.helpTopicsBuilder(&helpBuilder)
+
+	return helpBuilder.String(), nil
 }

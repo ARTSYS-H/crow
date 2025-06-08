@@ -71,6 +71,9 @@ func (app *App) AddCommand(command Command, description string) error {
 	return nil
 }
 
+// AddTopic adds a new help Topic to the application.
+// It takes a name, a short description and a long content as arguments.
+// It returns an error if the topic already exists.
 func (app *App) AddTopic(name, description, content string) error {
 	// Check if the topic already exists
 	if _, ok := app.Topics[name]; ok {

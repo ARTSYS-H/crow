@@ -23,7 +23,7 @@ func (app *App) helpHandler() error {
 
 	// Find a match for the requested Additional help topic
 	if topic, exist := app.Topics[app.Arguments[2]]; exist {
-		fmt.Println(topic.Content)
+		fmt.Println(topic)
 		return nil
 	}
 

@@ -8,5 +8,5 @@ type Topic struct {
 }
 
 func (t *Topic) String() string {
-	return fmt.Sprintln(t.Content)
+	return fmt.Sprint(t.Content)
 }

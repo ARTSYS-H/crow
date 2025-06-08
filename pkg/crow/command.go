@@ -61,9 +61,11 @@ func getFlagSet(cmd Command) (*flag.FlagSet, error) {
 
 	// Iterate over the command's fields
 	for i := range valueOfCmd.NumField() {
+		valueField := valueOfCmd.Type().Field(i)
+		valueUnsafePointer := valueOfCmd.Field(i).Addr().UnsafePointer()
 		// Get the "help" and "flag" tags of the field
-		help, helpExist := valueOfCmd.Type().Field(i).Tag.Lookup("help")
-		flg, flgExist := valueOfCmd.Type().Field(i).Tag.Lookup("flag")
+		help, helpExist := valueField.Tag.Lookup("help")
+		flg, flgExist := valueField.Tag.Lookup("flag")
 
 		// Check if the field has a "help" or "flag" tag
 		if helpExist || flgExist {
@@ -72,28 +74,28 @@ func getFlagSet(cmd Command) (*flag.FlagSet, error) {
 			if flgExist {
 				name = flg
 			} else {
-				name = strings.ToLower(valueOfCmd.Type().Field(i).Name)
+				name = strings.ToLower(valueField.Name)
 			}
 			// Configure the flag based on the field type
-			switch valueOfCmd.Type().Field(i).Type.Kind() {
+			switch valueField.Type.Kind() {
 			case reflect.String:
-				p := (*string)(valueOfCmd.Field(i).Addr().UnsafePointer())
-				fs.StringVar(p, name, valueOfCmd.Field(i).String(), help)
+				ptr := (*string)(valueUnsafePointer)
+				fs.StringVar(ptr, name, *ptr, help)
 			case reflect.Int:
-				p := (*int)(valueOfCmd.Field(i).Addr().UnsafePointer())
-				fs.IntVar(p, name, int(valueOfCmd.Field(i).Int()), help)
+				ptr := (*int)(valueUnsafePointer)
+				fs.IntVar(ptr, name, *ptr, help)
 			case reflect.Bool:
-				p := (*bool)(valueOfCmd.Field(i).Addr().UnsafePointer())
-				fs.BoolVar(p, name, valueOfCmd.Field(i).Bool(), help)
+				ptr := (*bool)(valueUnsafePointer)
+				fs.BoolVar(ptr, name, *ptr, help)
 			case reflect.Float64:
-				p := (*float64)(valueOfCmd.Field(i).Addr().UnsafePointer())
-				fs.Float64Var(p, name, valueOfCmd.Field(i).Float(), help)
+				ptr := (*float64)(valueUnsafePointer)
+				fs.Float64Var(ptr, name, *ptr, help)
 			case reflect.Uint64:
-				p := (*uint64)(valueOfCmd.Field(i).Addr().UnsafePointer())
-				fs.Uint64Var(p, name, valueOfCmd.Field(i).Uint(), help)
+				ptr := (*uint64)(valueUnsafePointer)
+				fs.Uint64Var(ptr, name, *ptr, help)
 			case reflect.Uint:
-				p := (*uint)(valueOfCmd.Field(i).Addr().UnsafePointer())
-				fs.UintVar(p, name, uint(valueOfCmd.Field(i).Uint()), help)
+				ptr := (*uint)(valueUnsafePointer)
+				fs.UintVar(ptr, name, *ptr, help)
 			default:
 				return nil, fmt.Errorf("encoutered unsupported field type/kind: %#v", valueOfCmd.Field(i))
 			}

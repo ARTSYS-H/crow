@@ -31,12 +31,12 @@ import (
 
 // App represents a command-line application with custom commands.
 type App struct {
+	Commands            []Command         // List of available commands
+	Arguments           []string          // Arguments passed to the application
 	Name                string            // Name of the application
 	Description         string            // Description of the application
-	Commands            []Command         // List of available commands
 	Topics              map[string]*Topic // List of available Topics associated with their names
 	CommandsDescription map[string]string // Description of commands associated with their names
-	Arguments           []string          // Arguments passed to the application
 }
 
 // New is a constructor to create a new instance of Crow App.

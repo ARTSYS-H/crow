@@ -31,12 +31,12 @@ import (
 
 // App represents a command-line application with custom commands.
 type App struct {
+	Commands            []Command         // List of available commands
+	Arguments           []string          // Arguments passed to the application
 	Name                string            // Name of the application
 	Description         string            // Description of the application
-	Commands            []Command         // List of available commands
 	Topics              map[string]*Topic // List of available Topics associated with their names
 	CommandsDescription map[string]string // Description of commands associated with their names
-	Arguments           []string          // Arguments passed to the application
 }
 
 // New is a constructor to create a new instance of Crow App.
@@ -51,9 +51,9 @@ func New(name, description string) *App {
 }
 
 // AddCommand adds a new command to the application.
-// It takes a Command and its description as arguments.
+// It takes a Command and its short description as arguments.
 // It returns an error if the command already exists.
-func (app *App) AddCommand(command Command, description string) error {
+func (app *App) AddCommand(command Command, short string) error {
 	// Get the name of the command
 	cmdName, err := getNameOfCommand(command)
 	if err != nil {
@@ -66,22 +66,22 @@ func (app *App) AddCommand(command Command, description string) error {
 
 	// Add the command and its description
 	app.Commands = append(app.Commands, command)
-	app.CommandsDescription[cmdName] = description
+	app.CommandsDescription[cmdName] = short
 
 	return nil
 }
 
 // AddTopic adds a new help Topic to the application.
-// It takes a name, a short description and a long content as arguments.
+// It takes a use name, a short description and a long content as arguments.
 // It returns an error if the topic already exists.
-func (app *App) AddTopic(name, description, content string) error {
+func (app *App) AddTopic(use, short, long string) error {
 	// Check if the topic already exists
-	if _, ok := app.Topics[name]; ok {
-		return fmt.Errorf("The command %s already exist", name)
+	if _, ok := app.Topics[use]; ok {
+		return fmt.Errorf("The command %s already exist", use)
 	}
 
 	// Add the topic
-	app.Topics[name] = &Topic{Description: description, Content: content}
+	app.Topics[use] = &Topic{Short: short, Long: long}
 
 	return nil
 }

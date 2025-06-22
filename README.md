@@ -6,13 +6,13 @@
 [![Go Reference](https://pkg.go.dev/badge/github.com/ARTSYS-H/crow/pkg/crow.svg)](https://pkg.go.dev/github.com/ARTSYS-H/crow/pkg/crow)
 [![Go Report Card](https://goreportcard.com/badge/github.com/ARTSYS-H/crow)](https://goreportcard.com/report/github.com/ARTSYS-H/crow)
 
-Crow is a Go library designed to create command-line applications in a simple and intuitive way using struct fields and tags. Inspired by projects like [Commandeer](https://github.com/jaffee/commandeer), Crow aims to provide a more straightforward and "plug & play" solution for creating small applications or scripts, thereby reducing the complexity often associated with libraries like [Cobra](https://github.com/spf13/cobra).
+Crow is a Go library designed to create command-line applications in a simple and intuitive way using struct fields and tags. Inspired by projects like [Commandeer][commandeer], Crow aims to provide a more straightforward and "plug & play" solution for creating small applications or scripts, thereby reducing the complexity often associated with libraries like [Cobra][cobra].
 
 > :warning: **Warning** Crow is still in development. Consider it experimental.
 
 ## Project Origin
 
-Crow was developed to meet a specific need: the quick and simple creation of small command-line applications. Personally, I have often found myself creating scripts and small applications where libraries like [Cobra](https://github.com/spf13/cobra) introduced unnecessary complexity. Additionally, tools like [Commandeer](https://github.com/jaffee/commandeer), which share a similar approach, seem to have lost some of their momentum in terms of maintenance. Crow was born to offer a simple and well-maintained alternative.
+Crow was developed to meet a specific need: the quick and simple creation of small command-line applications. Personally, I have often found myself creating scripts and small applications where libraries like [Cobra][cobra] introduced unnecessary complexity. Additionally, tools like [Commandeer][commandeer], which share a similar approach, seem to have lost some of their momentum in terms of maintenance. Crow was born to offer a simple and well-maintained alternative.
 
 ## Features
 
@@ -20,7 +20,7 @@ Crow was developed to meet a specific need: the quick and simple creation of sma
 - **Use of Structs and Tags**: Define your commands and options directly in Go structures with tags.
 - **Automatic Help Message Generation**: Help messages for your commands are automatically generated, making it easier to document and use your application.
 - **Plug and Play**: Designed to be easy to integrate and use without complex configuration.
-- **Ideal for Small Projects**: Perfect for scripts and small applications where libraries like [Cobra](https://github.com/spf13/cobra) would be excessive.
+- **Ideal for Small Projects**: Perfect for scripts and small applications where libraries like [Cobra][cobra] would be excessive.
 
 > :sparkles: **New Feature:** You can create additional help topic.
 
@@ -74,3 +74,6 @@ func main() {
 ## Contribution
 
 Contributions are welcome! If you have suggestions, bug fixes, or improvements, feel free to open an issue or a pull request.
+
+[commandeer]: https://github.com/jaffee/commandeer
+[cobra]: https://github.com/spf13/cobra

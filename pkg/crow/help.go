@@ -68,7 +68,7 @@ func (app *App) helpTopicsBuilder(builder *strings.Builder) {
 	if len(app.Topics) >= 1 {
 		builder.WriteString("\nAdditional help topics:\n\n")
 		for name, topic := range app.Topics {
-			fmt.Fprintf(builder, "\t%-15s %s\n", name, topic.Description)
+			fmt.Fprintf(builder, "\t%-15s %s\n", name, topic.Short)
 		}
 		fmt.Fprintf(builder, "\nUse \"%s help <topic>\" for more information about a topic.\n", app.Name)
 	}

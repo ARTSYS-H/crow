@@ -3,10 +3,10 @@ package crow
 import "fmt"
 
 type Topic struct {
-	Description string
-	Content     string
+	Short string
+	Long  string
 }
 
 func (t *Topic) String() string {
-	return fmt.Sprint(t.Content)
+	return fmt.Sprint(t.Long)
 }

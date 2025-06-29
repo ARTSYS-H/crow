@@ -3,6 +3,7 @@ package crow
 import (
 	"fmt"
 	"strings"
+	"text/tabwriter"
 )
 
 // helpRegexp is a regular expression pattern to match various forms of help requests.
@@ -50,6 +51,7 @@ func (app *App) helpHandler() error {
 
 func (app *App) helpCommandsBuilder(builder *strings.Builder) error {
 	if len(app.Commands) >= 1 {
+		tw := tabwriter.NewWriter(builder, 8, 0, 3, ' ', 0)
 		builder.WriteString("The commands are:\n\n")
 		for _, cmd := range app.Commands {
 			cmdName, err := getNameOfCommand(cmd)
@@ -57,8 +59,10 @@ func (app *App) helpCommandsBuilder(builder *strings.Builder) error {
 				return err
 			}
 			// Format each command and its description into the help string
-			fmt.Fprintf(builder, "\t%-15s %s\n", cmdName, app.CommandsDescription[cmdName])
+			// fmt.Fprintf(builder, "\t%-15s %s\n", cmdName, app.CommandsDescription[cmdName])
+			fmt.Fprintf(tw, "\t%s\t%s\n", cmdName, app.CommandsDescription[cmdName])
 		}
+		tw.Flush()
 		fmt.Fprintf(builder, "\nUse \"%s help <command>\" for more information about a command.\n", app.Name)
 	}
 	return nil
@@ -66,10 +70,13 @@ func (app *App) helpCommandsBuilder(builder *strings.Builder) error {
 
 func (app *App) helpTopicsBuilder(builder *strings.Builder) {
 	if len(app.Topics) >= 1 {
+		tw := tabwriter.NewWriter(builder, 8, 0, 3, ' ', 0)
 		builder.WriteString("\nAdditional help topics:\n\n")
 		for name, topic := range app.Topics {
-			fmt.Fprintf(builder, "\t%-15s %s\n", name, topic.Short)
+			// fmt.Fprintf(builder, "\t%-15s %s\n", name, topic.Short)
+			fmt.Fprintf(tw, "\t%s\t%s\n", name, topic.Short)
 		}
+		tw.Flush()
 		fmt.Fprintf(builder, "\nUse \"%s help <topic>\" for more information about a topic.\n", app.Name)
 	}
 }
